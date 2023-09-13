@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+// using System.Numerics;
 using UnityEngine;
 
 public class RotateBigCube : MonoBehaviour
@@ -33,11 +35,11 @@ public class RotateBigCube : MonoBehaviour
 
             transform.RotateAround(pivot, Vector3.right, xRotation * sensitivity);
             transform.RotateAround(pivot, Vector3.up, yRotation * sensitivity * -1);
-            transform.Rotate(Vector3.forward, 0f);
 
-
-            // transform.Rotate(Vector3.right, xRotation * sensitivity);
-            // transform.Rotate(Vector3.up, yRotation * sensitivity * -1); 
+            // Alternativa CHATGPT: 
+            // Quaternion rotation = Quaternion.Euler(xRotation * sensitivity, yRotation * sensitivity * -1, 0f);
+            // transform.rotation = rotation * transform.rotation;
+ 
         } else {
             if (Input.GetKeyDown(KeyCode.R)) {
                 FindClosest();
@@ -48,33 +50,31 @@ public class RotateBigCube : MonoBehaviour
 
     }
 
-    
 
-    void AlignX() {
-        float distance = Quaternion.FromToRotation(transform.eulerAngles, Vector3.right).x;
-        transform.Rotate(Vector3.right, distance);
-    }
 
     void FindClosest() {
-        Vector3 currentRotation = transform.rotation.eulerAngles;
-        Transform cubeTransform = transform; 
 
+        float x = Mathf.Abs(Vector3.Dot(transform.right, Vector3.right));
+        float y = Mathf.Abs(Vector3.Dot(transform.up, Vector3.right));
+        float z = Mathf.Abs(Vector3.Dot(transform.forward, Vector3.right));
+        
+        float closest; 
 
-        Quaternion targetRotationX = Quaternion.FromToRotation(transform.right, Vector3.right);
-        Quaternion targetRotationY = Quaternion.FromToRotation(transform.up, Vector3.right);
-        Quaternion targetRotationZ = Quaternion.FromToRotation(transform.forward, Vector3.right);
+        if (x > y && x > z) {
+            closest = x; 
+        } else if (y > x && y > z) {
+            closest = y; 
+        } else {
+            closest = z; 
+        }
 
-
-        Debug.Log("");
-        Debug.Log("");
-        Debug.Log("================");
-        Debug.Log($"Distancia de x para 0: {Quaternion.Angle(transform.rotation, targetRotationX)}"); 
-        Debug.Log($"Distancia de y para 0: {Quaternion.Angle(transform.rotation, targetRotationY)}"); 
-        Debug.Log($"Distancia de z para 0: {Quaternion.Angle(transform.rotation, targetRotationZ)}"); 
-        Debug.Log("================");
-        Debug.Log("");
-        Debug.Log("");
-
+        // Debug.Log("=============");
+        // Debug.Log("=============");
+        // Debug.Log($"Rotation of x: {Mathf.Abs(x)}");
+        // Debug.Log($"Rotation of y: {Mathf.Abs(y)}");
+        // Debug.Log($"Rotation of z: {Mathf.Abs(z)}");
+        // Debug.Log("=============");
+        // Debug.Log("=============");
     }
 
    
