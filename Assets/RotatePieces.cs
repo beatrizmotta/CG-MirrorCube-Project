@@ -13,11 +13,15 @@ public class RotatePieces : MonoBehaviour
 
     private bool isRotating, hasAligned;
 
+    RotateCube cube;
+
+    public Vector3[] axisOfRotation = {Vector3.forward, Vector3.right};
+
 
     void Start()
     {
         myFace = GameObject.Find("Front").transform;
-
+        cube = FindObjectOfType<RotateCube>();
     }
 
     // Update is called once per frame
@@ -31,7 +35,8 @@ public class RotatePieces : MonoBehaviour
 
 
         if (Input.GetMouseButtonDown(0))
-        {
+        {   
+            print(cube.axisIndex);
             isRotating = true;
         }
         else if (Input.GetMouseButtonUp(0))
@@ -44,9 +49,9 @@ public class RotatePieces : MonoBehaviour
         if (isRotating)
         {
             float xRotation = Input.GetAxis("Mouse X");
-            // pivot = myFace.eulerAngles;
+            pivot = myFace.eulerAngles;
 
-            pivot = new Vector3(0, 0, 0);
+            // pivot = new Vector3(0, 0, 0);
 
             if (isFront) {
                 transform.RotateAround(pivot, Vector3.forward, xRotation * -1 * 5f);
