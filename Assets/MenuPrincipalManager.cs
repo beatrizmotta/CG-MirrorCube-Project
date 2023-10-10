@@ -1,24 +1,16 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
 
-public class MenuPrincipalManager : MonoBehaviour
-{
-
+public class MenuPrincipalManager : MenuManager {
     public GameObject painelMenuInicial; 
     public GameObject painelOpcoes; 
     public List<GameObject> cubes; 
     private int cubeIndex = 0; 
-    public ChangeTexture textureManager; 
 
     public void Start() {
         painelOpcoes.SetActive(false);
         cubes[cubeIndex].SetActive(true);
-    }
-
-    public void Jogar() {
-        SceneManager.LoadScene("Game");
     }
 
     public void AbrirOpcoes() {
@@ -29,17 +21,10 @@ public class MenuPrincipalManager : MonoBehaviour
     public void EscolherCube() {
         painelOpcoes.SetActive(false);
         painelMenuInicial.SetActive(true);
-        
-        // Set active cube here
-
-        string cubeName = cubes[cubeIndex].name;
-        textureManager.changeTexture(cubeName);
-
-
+        PlayerPrefs.SetInt("cubeIdentifier", cubeIndex);
     }
 
     public void BotaoEsquerda() {
-
         cubes[cubeIndex].SetActive(false);
 
         if (cubeIndex - 1 < 0) {
@@ -49,13 +34,9 @@ public class MenuPrincipalManager : MonoBehaviour
         }
 
         cubes[cubeIndex].SetActive(true);
-
     }
 
     public void BotaoDireita() {
-
-        Debug.Log("Bate rebate");
-
         cubes[cubeIndex].SetActive(false);
 
         if (cubeIndex + 1 == cubes.Count) {
@@ -65,6 +46,5 @@ public class MenuPrincipalManager : MonoBehaviour
         }
 
         cubes[cubeIndex].SetActive(true);
-
     }
 }

@@ -1,6 +1,12 @@
 using System.Collections.Generic;
 
 namespace App {
+    public enum TextureIdentifier {
+        Purple,
+        Golden,
+        Silver
+    }
+
     public enum LayerIdentifier {
         Top,
         Back,

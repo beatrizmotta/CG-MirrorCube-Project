@@ -5,17 +5,17 @@ using App;
 public class LayerManager: MonoBehaviour {
     public void Update() {
         if (Input.GetKeyDown(KeyCode.Return)) {
-            this.RotateCube(LayerMovement.TopClockwise);
+            this.RotateLayer(LayerMovement.TopClockwise);
         }
     }
     
-    public void RotateCube(LayerMovement movement) {
+    public void RotateLayer(LayerMovement movement) {
         Layer layer = this.GetLayerByMovement(movement);
+        Debug.Log(layer.pieces);
 
         switch(movement) {
             case LayerMovement.TopClockwise: {
                 layer.transform.Rotate(Vector3.up, 90f, Space.Self);
-                Debug.Log("Rotated");
                 break;
             }
         }

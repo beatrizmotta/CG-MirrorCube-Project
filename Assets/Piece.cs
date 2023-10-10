@@ -1,7 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Piece : MonoBehaviour
-{
+public class Piece : MonoBehaviour {
+    private Material texture;
+
+    public void changeTexture(Material texture) {
+        Renderer renderer = GetComponent<Renderer>();
+        renderer.material = texture;
+        this.texture = texture;
+    }
 }
