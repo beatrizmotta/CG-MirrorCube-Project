@@ -11,6 +11,10 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            Jogar();
+        }
+
         if (Input.GetKeyDown(KeyCode.Return)) {
             Jogar();
         }
