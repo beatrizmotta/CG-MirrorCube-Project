@@ -6,6 +6,12 @@ public class CameraManager : MonoBehaviour
 {
     new Camera camera;
 
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.R)) {
+            ResetCamera();
+        }
+    }
+
     void Start() {
         camera = GameObject.FindObjectOfType<Camera>();
     }
